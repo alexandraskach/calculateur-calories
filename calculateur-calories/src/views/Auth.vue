@@ -1,11 +1,8 @@
 <script setup>
-
 </script>
 
 <template>
-  <RouterView />
+  <main>
+    login page
+  </main>
 </template>
-
-<style lang="scss">
-
-</style>
