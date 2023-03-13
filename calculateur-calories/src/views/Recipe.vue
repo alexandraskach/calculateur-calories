@@ -1,11 +1,8 @@
 <script setup>
-
 </script>
 
 <template>
-  <RouterView />
+  <main>
+    hello recipe id
+  </main>
 </template>
-
-<style lang="scss">
-
-</style>
