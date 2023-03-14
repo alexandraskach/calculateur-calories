@@ -18,7 +18,10 @@ export default defineConfig({
         additionalData: `
               @import "./src/scss/_variables.scss";
               @import "./src/scss/_mixins.scss";
-              @import "./src/scss/_base.scss"
+              @import "./src/scss/_base.scss";
+              @import "./src/scss/_fonts.scss";
+              @import "./src/scss/_forms.scss";
+              @import "./src/scss/_buttons.scss";
             `
       }
     }
