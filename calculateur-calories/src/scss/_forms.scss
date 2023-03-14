@@ -1,0 +1,31 @@
+
+label {
+    margin: 0 0 1rem;
+    font-family: $font-primary;
+    font-weight: 600;
+    display: block;
+    margin-bottom: .5rem;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    @extend .input;
+}
+
+input[type="checkbox"] {
+	width: 1rem;
+	margin: 0 1rem 0 0;
+}
+
+.form-error {
+    @extend .small;
+    display: block;
+    margin-bottom: 2rem;
+    padding: 0 1.8rem;
+    color: $color-error;
+}
+
+.form-container{
+    max-width: 500px;
+}

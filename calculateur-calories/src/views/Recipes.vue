@@ -6,3 +6,7 @@
     hello recipes
   </main>
 </template>
+
+<style lang="scss">
+
+</style>

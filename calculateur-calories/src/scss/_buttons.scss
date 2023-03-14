@@ -1,0 +1,64 @@
+.button {
+  @extend .body-semibold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-width: 5.2rem;
+  height: 4.2rem;
+  padding: 1.2rem 3.2rem;
+  border: solid 1px $color-tertiary;
+  border-radius: $radius;
+  text-align: center;
+  background: none;
+  color: $color-tertiary;
+  text-decoration: none !important;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  & > svg {
+    margin-left: 1rem;
+  }
+
+  &--primary {
+    color: $color-tertiary;
+    background-color: $color-primary;
+    border-color: $color-primary;
+  }
+
+  &--secondary {
+    color: white;
+    background-color: $color-secondary;
+  }
+
+  &--tertiary {
+    color: white !important;
+    background-color: $color-tertiary;
+  }
+
+  &--big {
+    height: auto;
+    padding: 2rem;
+    font-family: $font-primary;
+    font-size: 1.8rem;
+    line-height: 2.7rem;
+    font-weight: 400;
+    box-shadow: $shadow;
+  }
+
+  &--outline {
+    @include buttonOutline;
+  }
+  &--dark {
+    @include buttonDark;
+    &:hover {
+      transition: 0.2s;
+      cursor: pointer;
+      border: 1px solid $color-tertiary;
+      background-color: $color-lightgray;
+      color: $color-tertiary;
+    }
+  }
+}
