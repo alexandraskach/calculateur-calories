@@ -1,39 +1,29 @@
 <script>
+import { useAuthStore } from '../stores/auth.store';
 // eslint-disable-next-line vue/no-export-in-script-setup
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
+  // https://www.bezkoder.com/vue-3-authentication-jwt/
   name: 'Login',
   data() {
     return {
-      Email: '',
-      MotDePasse: ''
+      email: '',
+      password: ''
     }
   },
   methods: {
     onReset() {
-      this.Email = ''
-      this.MotDePasse = ''
+      this.email = ''
+      this.password = ''
     },
     onSubmit(e) {
       e.preventDefault()
-      console.log(this.Email, this.MotDePasse)
-      if (!this.formValid) {
-        return
-      }
-      // if (!localStorage.getItem("messages")) {
-      //   localStorage.setItem("messages", JSON.stringify([]));
-      // }
-      // const messages = JSON.parse(localStorage.getItem("messages"));
-      // const { name, email, message } = this;
-      // messages.push({
-      //   name,
-      //   email,
-      //   message,
-      // });
-      // localStorage.setItem("messages", JSON.stringify(messages));
-      this.onReset()
-    }
+    const authStore = useAuthStore();
+    return authStore.login(this.email, this.password)
+        .catch(error => console.log(error));
+ 
   }
+}
 }
 </script>
 
@@ -44,14 +34,14 @@ export default {
       <form v-on:submit="onSubmit">
         <div class="form-control">
           <label>Email</label>
-          <input type="text" v-model="Email" name="Email" placeholder="Entrez votre mail" />
+          <input type="text" v-model="email" name="email" placeholder="Entrez votre mail" />
         </div>
         <div class="form-control">
           <label>Mot de passe</label>
           <input
             type="password"
-            v-model="MotDePasse"
-            name="mdp"
+            v-model="password"
+            name="password"
             placeholder="Entrez votre mot de passe"
           />
         </div>
