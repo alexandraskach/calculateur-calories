@@ -5,6 +5,7 @@ import Recipe from '../views/Recipe.vue'
 import Register from '../views/Register.vue'
 import Login from '../views/Login.vue'
 import AddRecipe from '../views/AddRecipe.vue'
+import EditRecipe from '../views/EditRecipe.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -25,9 +26,14 @@ const router = createRouter({
       component: AddRecipe
     },
     {
-      path: '/recipe/:recipeId',
+      path: '/recipe/:receiptId',
       name: 'recipe',
       component: Recipe
+    },
+    {
+      path: '/recipe/:receiptId/edit',
+      name: 'edit-recipe',
+      component: EditRecipe
     },
     {
       path: '/register',

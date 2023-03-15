@@ -9,8 +9,7 @@ body{
 
 <template>
   <main>
-    <h1>Home Page</h1>
-      Toutes les recettes: 
+    <h1>Hello @username !</h1>
     <Recipes />
   </main>
 </template>
