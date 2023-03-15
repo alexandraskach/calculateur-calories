@@ -10,6 +10,7 @@ body{
 <template>
   <main>
     <h1>Home Page</h1>
+      Toutes les recettes: 
     <Recipes />
   </main>
 </template>
