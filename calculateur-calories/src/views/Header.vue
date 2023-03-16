@@ -7,7 +7,8 @@ export default {
   name: 'Header',
   data() {
     return {
-     user:''
+     user:'',
+     isLoggedOut:false
     } 
   },
   mounted(){
@@ -15,11 +16,14 @@ export default {
     const { user: authUser } = storeToRefs(authStore);
     console.log(authUser);
     this.user = authUser;
-    console.log(this.user.user)
+    if(!this.user.user) {
+      this.isLoggedOut = true
+    }
   },
   methods: {
     Logout() {
     const authStore = useAuthStore();
+     this.isLoggedOut=true;
     return authStore.logout()
  
   }
@@ -39,13 +43,13 @@ export default {
       <li class="nav__item">
         <router-link to="/recipes/add-new" class="nav-link">Ajouter une recette</router-link>
       </li>
-      <li class="nav__item" v-if="!user.user">
+      <li class="nav__item" v-if="isLoggedOut">
         <router-link to="/register" class="nav-link">S'inscrire</router-link>
       </li>
-      <li class="nav__item" v-if="!user.user">
+      <li class="nav__item" v-if="isLoggedOut">
         <router-link to="/login" class="nav-link">Se connecter</router-link>
       </li>
-        <li class="nav__item" v-if="user.user">
+        <li class="nav__item" v-if="!isLoggedOut">
         <a @click="Logout()" class="nav-link">Deconnexion</a>
       </li>
     </nav>
