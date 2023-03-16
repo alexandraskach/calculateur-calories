@@ -1,4 +1,7 @@
 <script>
+import { storeToRefs } from 'pinia'
+import { useAuthStore } from '../stores/auth.store'
+
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name: 'AddRecipe',
@@ -13,25 +16,32 @@ export default {
       unity: '',
       ingredientIsAdded: false,
       ingredientsList: Array,
-      selectedIngredients: Array
+      selectedIngredients: Array,
+      user: ''
     }
   },
   created() {
-    this.getAllIngredients()
+    const authStore = useAuthStore();
+    const { user: authUser } = storeToRefs(authStore);
+    console.log(authUser);
+    this.user = authUser;
+    console.log(this.user.user)
+    this.getAllIngredients(this.user.user.userId)
+  
   },
-  //   computed: {
-  //     formValid() {
-  //       const { receiptName, receiptDescription,ingredientsName, ingredientsCount,ingredientsWeight, unity } = this;
-  //       return (
-  //         receiptName.length > 0 &&
-  //         receiptDescription.length > 0 &&
-  //         ingredientsName.length > 0 &&
-  //         ingredientsCount.length > 0 &&
-  //         ingredientsWeight.length > 0 &&
-  //         unity.length > 0
-  //       );
-  //     },
-  //   },
+  computed() {
+    // formValid() {
+    //   const { receiptName, receiptDescription,ingredientsName, ingredientsCount,ingredientsWeight, unity } = this;
+    //   return (
+    //     receiptName.length > 0 &&
+    //     receiptDescription.length > 0 &&
+    //     ingredientsName.length > 0 &&
+    //     ingredientsCount.length > 0 &&
+    //     ingredientsWeight.length > 0 &&
+    //     unity.length > 0
+    //   );
+    // },
+  },
   methods: {
     onReset() {
       ;(this.receiptName = ''),
@@ -48,13 +58,7 @@ export default {
       let body = {
         receiptName: this.receiptName,
         receiptDescription: this.receiptDescription,
-        user: {
-          userId: 2,
-          username: 'johndoe',
-          email: 'johndoe@example.com',
-          firstName: 'John',
-          lastName: 'Doe'
-        },
+        user: this.user.user,
         ingredients: this.selectedIngredients
       }
       fetch('http://localhost:8080/api/create-receipt', {
@@ -70,21 +74,6 @@ export default {
         .catch((err) => {
           console.log(err)
         })
-      // if (!this.formValid) {
-      //     console.log("form invalid")
-      //     return;
-      //   }
-      // if (!localStorage.getItem("messages")) {
-      //   localStorage.setItem("messages", JSON.stringify([]));
-      // }
-      // const messages = JSON.parse(localStorage.getItem("messages"));
-      // const { name, email, message } = this;
-      // messages.push({
-      //   name,
-      //   email,
-      //   message,
-      // });
-      // localStorage.setItem("messages", JSON.stringify(messages));
       this.onReset()
     },
     onSubmitIngredient(e) {
@@ -95,7 +84,7 @@ export default {
         ingredientsName: this.ingredientsName,
         ingredientsCount: this.ingredientsCount,
         ingredientsWeight: this.ingredientsWeight,
-        idUser: 2,
+        idUser: this.user.user.userId,
         unity: this.unity
       }
       fetch('http://localhost:8080/api/create-ingredient', {
@@ -108,14 +97,15 @@ export default {
         .then((response) => {
           console.log(response)
           this.ingredientIsAdded = true
+          this.getAllIngredients(this.user.user.userId)
         })
         .catch((err) => {
           console.log(err)
         })
       this.onReset()
     },
-    getAllIngredients() {
-      fetch('http://localhost:8080/api/get-all-ingredients-by-iduser/3', {
+    getAllIngredients(userId) {
+      fetch(`http://localhost:8080/api/get-all-ingredients-by-iduser/${userId}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json'
@@ -229,7 +219,7 @@ export default {
                 <option
                   v-for="ingredient in ingredientsList"
                   :key="ingredient.ingredientsId"
-                  :value="ingredient.ingredientsId"
+                  :value="ingredient"
                 >
                   {{ ingredient.ingredientsName }}
                 </option>

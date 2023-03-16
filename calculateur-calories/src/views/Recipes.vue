@@ -1,14 +1,22 @@
 <script>
+import { storeToRefs } from 'pinia'
+import { useAuthStore } from '../stores/auth.store'
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name: 'Recipes',
   data() {
     return {
-      recettes: Array
+      recettes: Array,
+      user: ''
     }
   },
   created() {
-    this.getAllRecipes()
+     const authStore = useAuthStore();
+    const { user: authUser } = storeToRefs(authStore);
+    console.log(authUser);
+    this.user = authUser;
+    console.log(this.user.user)
+    this.getAllRecipes(this.user.user.userId)
   },
   methods: {
     deleteRecipe(receiptId) {
@@ -30,8 +38,8 @@ export default {
           console.log(err)
         })
     },
-    getAllRecipes() {
-      fetch('http://localhost:8080/api/get-all-receipt-by-iduser/2', {
+    getAllRecipes(userId) {
+      fetch(`http://localhost:8080/api/get-all-receipt-by-iduser/${userId}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json'
@@ -74,8 +82,8 @@ export default {
           :to="{
             name: 'recipe',
             params: {
-              receiptId: recette.receiptId
-            }
+              receiptId: recette.receiptId,
+            },
           }"
           >Voir plus</router-link
         >
