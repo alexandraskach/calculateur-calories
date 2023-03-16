@@ -74,9 +74,25 @@ export default {
           <input  type="button" value="Ajouter une recette" class="button button--black button-recette" />
           </router-link> 
     </div>
+     <div class="card-container">
     <div v-for="recette in recettes" :key="recette.receiptId">
-      <div class="card">
-        <h2 class="body-semibold">{{ recette.receiptName }}</h2>
+      <div class="card card__recette">
+        <div class="title-container">
+          <h2 class="body-semibold">{{ recette.receiptName }}</h2>
+          <div>
+           <router-link
+           class="icon"
+          :to="{
+            name: 'edit-recipe',
+            params: {
+              receiptId: recette.receiptId
+            }
+          }"
+          >🖊</router-link
+        >
+          <a  class="icon" @click="deleteRecipe(recette.receiptId)">🗑</a>
+          </div>
+        </div>
         <p>{{ recette.receiptDescription }}</p>
         <router-link
           :to="{
@@ -87,17 +103,17 @@ export default {
           }"
           >Voir plus</router-link
         >
-        <a @click="deleteRecipe(recette.receiptId)">Supprimer</a>
         <router-link
           :to="{
-            name: 'edit-recipe',
+            name: 'analyse-recipe',
             params: {
               receiptId: recette.receiptId
             }
           }"
-          >Editer</router-link
+          >Analyser</router-link
         >
       </div>
+    </div>
     </div>
   </main>
 </template>
@@ -111,5 +127,49 @@ export default {
 .title-container {
   display: flex;
   align-items: center;
+}
+
+.container {
+  padding: 1rem;
+}
+
+.title-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+.icon{
+  font-size: 2rem;
+  padding: 0.5rem;
+}
+
+.card-container {
+      gap: 107px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.card-links {
+  margin-top: 1rem;
+}
+
+.card-links a {
+  margin-right: 1rem;
+}
+
+.card-links a:hover {
+  text-decoration: underline;
+}
+
+.card-links router-link:hover {
+  text-decoration: underline;
+}
+
+@media screen and (max-width: 768px) {
+  .card {
+    width: 100%;
+  }
 }
 </style>

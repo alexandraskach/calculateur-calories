@@ -126,13 +126,14 @@ export default {
     }
   }
 }
+    // {# <h1>Création d'une recette</h1> #}
 </script>
 
 <template>
   <main class="container">
-    <h1>Création d'une recette</h1>
-    <h2>Etape 1 - Ajouter des ingrédients</h2>
+    <div class="add-recette-container">
     <div class="form-container">
+    <h2>Etape 1 - Ajouter des ingrédients</h2>
       <form v-on:submit="onSubmitIngredient">
         <div class="form-control">
           <label>Ingredient - nom</label>
@@ -230,7 +231,16 @@ export default {
         </form>
       </div>
     </div>
+    </div>
   </main>
 </template>
 
-<style lang="scss"></style>
+<style lang="scss">
+.add-recette-container{
+  display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 90px;
+}
+</style>

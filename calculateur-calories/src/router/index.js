@@ -6,6 +6,7 @@ import Register from '../views/Register.vue'
 import Login from '../views/Login.vue'
 import AddRecipe from '../views/AddRecipe.vue'
 import EditRecipe from '../views/EditRecipe.vue'
+import AnalyseRecipe from '../views/AnalyseRecipe.vue'
 import { useAuthStore }  from '../stores/auth.store'
 
 export const router = createRouter({
@@ -35,6 +36,11 @@ export const router = createRouter({
       path: '/recipe/:receiptId/edit',
       name: 'edit-recipe',
       component: EditRecipe
+    },
+    {
+      path: '/recipe/:receiptId/analyse',
+      name: 'analyse-recipe',
+      component: AnalyseRecipe
     },
     {
       path: '/register',

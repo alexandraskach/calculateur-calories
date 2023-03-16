@@ -15,7 +15,7 @@ body{
 
 <template>
   <main>
-    <h1>Hello {{authUser?.user.name}}!</h1>
+    <h1>Hello {{authUser?.user.name}}! 👋</h1>
     <Recipes />
   </main>
 </template>
