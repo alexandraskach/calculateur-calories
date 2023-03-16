@@ -40,9 +40,9 @@ export default{
 </script>
 
 <template>
-  <main class="container">
-    <h2>Créer un compte</h2>
+  <main class="container  center">
     <div class="form-container">
+          <div class="title-center">  <h2>Créer un compte</h2></div>
     <form v-on:submit="onSubmit">
     <div class="form-control">
       <label>Email</label>

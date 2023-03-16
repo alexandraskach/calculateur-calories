@@ -84,6 +84,10 @@ select {
   margin-bottom: 3rem;
 }
 
+.center{
+  display: flex;
+  justify-content: center;
+}
 .card {
     display: flex;
     flex-direction: column;
