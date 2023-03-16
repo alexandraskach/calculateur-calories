@@ -1,4 +1,5 @@
 <script>
+import router from '../router';
 import { useAuthStore } from '../stores/auth.store';
 // eslint-disable-next-line vue/no-export-in-script-setup
 export default {
@@ -19,7 +20,7 @@ export default {
     onSubmit(e) {
       e.preventDefault()
     const authStore = useAuthStore();
-    return authStore.login(this.email, this.password)
+    authStore.login(this.email, this.password).then(()=>router.push('/'))
         .catch(error => console.log(error));
  
   }

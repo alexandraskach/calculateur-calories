@@ -1,6 +1,7 @@
 <script>
 import { storeToRefs } from 'pinia'
 import { useAuthStore } from '../stores/auth.store'
+import router from '../router';
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name: 'Recipes',
@@ -75,6 +76,7 @@ export default {
           </router-link> 
     </div>
      <div class="card-container">
+    <div v-if="recettes.length === 0">C'est vide pour l'instant 😿</div>
     <div v-for="recette in recettes" :key="recette.receiptId">
       <div class="card card__recette">
         <div class="title-container">

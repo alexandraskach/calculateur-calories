@@ -1,6 +1,7 @@
 <script>
 import { storeToRefs } from 'pinia'
 import { useAuthStore } from '../stores/auth.store'
+import router from '../router';
 
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
@@ -70,6 +71,7 @@ export default {
       })
         .then((response) => {
           console.log(response)
+          router.push('/recipes')
         })
         .catch((err) => {
           console.log(err)
@@ -181,7 +183,7 @@ export default {
         <input
           type="button"
           @click="ingredientIsAdded = true"
-          value="Passez l'étape"
+          value="Passer l'étape"
           class="button button--outline"
         />
         <input
