@@ -41,7 +41,28 @@ export default {
         .catch((err) => {
           console.log(err)
         })
-    }
+    },
+    exportToCsv() {
+    const headers = ['ReceiptName', 'totalCalories', 'Date']; // Ajouter les entêtes des colonnes CSV
+    const rows = [[this.analyse.ReceiptName, this.analyse.totalCalories, this.analyse.Date]]; // Ajouter les données de l'analyse
+    let csvContent = "data:text/csv;charset=utf-8,";
+
+    // Ajouter les entêtes
+    csvContent += headers.join(";") + "\r\n";
+
+    // Ajouter les données
+    rows.forEach(function(row) {
+      csvContent += row.join(";") + "\r\n";
+    });
+
+    // Télécharger le fichier CSV
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", "analyse.csv");
+    document.body.appendChild(link); // Nécessaire pour certains navigateurs
+    link.click();
+  }
   }
 }
 
@@ -54,6 +75,7 @@ export default {
      <h3>{{ analyse.ReceiptName }}</h3>
      <p>Total calories : {{ analyse.totalCalories }}</p>
      <p>Date d'analyse : {{ analyse.Date }}</p>
+      <button class="button button--primary" @click="exportToCsv">Exporter en CSV</button>
      </div>
   </main>
 </template>

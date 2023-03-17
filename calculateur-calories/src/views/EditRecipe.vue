@@ -69,21 +69,6 @@ export default {
         .catch((err) => {
           console.log(err)
         })
-      // if (!this.formValid) {
-      //     console.log("form invalid")
-      //     return;
-      //   }
-      // if (!localStorage.getItem("messages")) {
-      //   localStorage.setItem("messages", JSON.stringify([]));
-      // }
-      // const messages = JSON.parse(localStorage.getItem("messages"));
-      // const { name, email, message } = this;
-      // messages.push({
-      //   name,
-      //   email,
-      //   message,
-      // });
-      // localStorage.setItem("messages", JSON.stringify(messages));
       this.onReset()
     },
     onSubmitIngredient(e) {
